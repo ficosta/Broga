@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Extraindo Componentes - React Album - Demo 1</title>
+  <style type="text/css">
+   html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #root {
+      width: 100%;
+      height: 100%;
+      font-family: sans-serif;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #CB356B;
+      background: -webkit-linear-gradient(to right, #BD3F32, #CB356B);
+      background: linear-gradient(to right, #BD3F32, #CB356B);
+    }
+
+    .album {
+      width: 90%;
+    }
+
+    .album-title {
+      font-size: 60px;
+    }
+    .album-band {
+      font-size: 45px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .album-cover {
+      padding-top: 20px;
+    }
+    .album-info {
+      display: flex;
+    }
+    .album-tracks {
+      padding-left: 20px;
+      font-size: 40px;
+    }
+    .album-track {
+      padding: 10px 0;
+    }
+
+    .album-track:nth-child(even) {
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .album-track:nth-child(odd) {
+      color: white;
+    }
+
+  </style>
+</head>
+  
+<body>
+  <div id="root"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const AlbumTitle = (props) => {
+      return (<div className="album-title">{props.name}</div>)
+    }
+    const AlbumBand = ({name}) => {
+      return (<div className="album-band">{name}</div>);
+    }
+    const AlbumTrack = ({track, title}) => {
+      return (<div className="album-track">{track} - {title}</div>);
+    }
+    const AlbumCover = ({src, alt}) => {
+      return(
+        <div className="album-cover">
+          <img src={src} alt={alt} />
+        </div>
+      );
+    }
+
+    const Album = () => {
+      const albumCoverUrl = 'https://upload.wikimedia.org/wikipedia/en/3/32/IronMaiden_NumberOfBeast.jpg';
+
+      return (
+        <div className="album">
+          <AlbumTitle name="The Number of the Beast" />
+          <AlbumBand name="Iron Maiden" />
+          <div className="album-info">
+            <AlbumCover src={albumCoverUrl} alt="Run To The Hills" />
+            <div className="album-tracks">
+              <AlbumTrack track="1" title="Invaders" />
+              <AlbumTrack track="2" title="Children of the Damned" />
+              <AlbumTrack track="3" title="The Prisioner" />
+              <AlbumTrack track="4" title="22 Acacia Avenue" />
+              <AlbumTrack track="5" title="The Number of the Beast" />
+              <AlbumTrack track="6" title="Run to the Hills" />
+              <AlbumTrack track="7" title="Gangland" />
+              <AlbumTrack track="8" title="Halloweed Be Thy Name" />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const element = <Album/>;
+    ReactDOM.render(element, document.getElementById('root'));
+  </script>
+</body>
+</html>
