@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eventos - Lights App - Demo</title>
+  <style type="text/css">
+   html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    #root {
+      width: 100%;
+      height: 100%;
+      font-family: "Lato",sans-serif;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .room {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+    }
+
+    .room.dark { 
+      background: #0F2027;
+      background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+      background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    }
+
+    .room.light { 
+      background: #FFEFBA;
+      background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);
+      background: linear-gradient(to right, #FFFFFF, #FFEFBA);
+    }
+
+    .room button { 
+      width: 360px;
+      height: 120px;
+      outline: none;
+      cursor: pointer;
+      background: none;
+      transition: .5s;
+      font-size: 38px;
+      border-radius: 5px;
+    }
+
+    .room.light button { border: solid 3px #000; color: #000; }
+
+    .room.dark button {  border: solid 3px #fff; color: #fff; }
+    
+  </style>
+</head>
+  
+<body>
+  <div id="root"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Lights extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {isOn: true};
+        this.toggle = this.toggle.bind(this);
+      }
+
+      toggle() {
+        this.setState(state => ({
+          isOn: !state.isOn
+        }));
+      }
+
+      render() {
+        const { isOn } = this.state;
+        const roomClass = (isOn) ? 'light' : 'dark';
+
+        return (
+          <div className={`room ${roomClass}`}>
+            <button onClick={this.toggle}>
+              {this.state.isOn ? 'Turn OFF' : 'Turn ON'}
+            </button>
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(<Lights />, document.getElementById('root'));
+  </script>
+</body>
+</html>
